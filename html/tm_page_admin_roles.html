@@ -1,0 +1,40 @@
+<div class="fdd-main-nav">
+    <div ng-include src="partials.nav"></div>
+</div>
+<div class="fss-sidebar-content-wrapper">
+    <div class="fss-sidebar-nav-container">
+        <sub-nav nav="navs.admin"
+                 project="project"
+                 phase="phase"
+                 root='true'></sub-nav>
+        <button ng-click="showAdminRolesModal()" class="btn btn-default fss-sidebar-navaction">
+            Add Role</button>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong class="ng-binding">Roles
+                Filters</strong></div>
+            <div class="form-group row">
+                <label class="control-label text-right">Role Code</label>
+                <input name="role_code" type="text" ng-model="search.role_code"
+                       class="form-control"/>
+            </div>
+            <div class="form-group row">
+                <label class="control-label text-right">Role Name</label>
+                <input name="role_name" type="text" ng-model="search.role_name"
+                       class="form-control"/>
+            </div>
+            <div class="form-group row">
+                <label class="control-label text-right">Standard Rate</label>
+                <input name="standard_rate" type="text" ng-model="search.standard_rate"
+                       class="form-control"/>
+            </div>
+            <div class="form-group row">
+                <label class="control-label text-right">Clearance Rate</label>
+                <input name="clearance_rate" type="text" ng-model="search.clearance_rate" class="form-control"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="fss-body-container">
+        <div ng-include src="partials.admin_roles_list"></div>
+    </div>
+</div>

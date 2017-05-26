@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">{{headerTitle}}</strong></div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped" ng-show="selectedUsers.length != 0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-xs-4">
+                        <span class="fss-sort-click" ng-init="sortType = 'usr_name';" ngclick="sortType = 'usr_name'; sortReverse = !sortReverse">
+                            Username
+                            <span class="caret" ng-show="sortType == 'usr_name' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'usr_name' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-4">
+                        <span class="fss-sort-click" ng-click="sortType = 'usr_desc'; sortReverse = !sortReverse">
+                            Full Name
+                            <span class="caret" ng-show="sortType == 'usr_desc' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'usr_desc' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-4">
+                        <span class="fss-sort-click" ng-click="sortType = 'usr_email'; sortReverse = !sortReverse">
+                            Email
+                            <span class="caret" ng-show="sortType == 'usr_email' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'usr_email' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ng-scope" ng-repeat="user in selectedUsers | filter:filterData |
+                                                orderBy:sortType:sortReverse">
+                    <td>
+                        <span ng-click="removeUser(user)" >
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                    </td>
+                    <td>{{user.usr_name}}</td>
+                    <td>{{user.usr_desc}}</td>
+                    <td>{{user.usr_email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="completeContainer" ng-show="!nan">
+    <div class="completeBkg">
+        <div class="complete" ng-style="dynamicCSS" ng-class="{'fss-bar-nearend': pValue>.98}"></div>
+        <span ng-class="{'fss-begin-bar': pValue<.1, 'fss-end-bar':pValue>.9}">{{pValue | percentage:2}}</span>
+    </div>
+</div>

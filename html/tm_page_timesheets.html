@@ -1,0 +1,26 @@
+<div class="fdd-main-nav">
+    <div ng-include src="partials.nav"></div>
+</div>
+<div class="fss-sidebar-content-wrapper">
+    <div class="fss-tm-body-container">
+        <div class="col-sm-12" ng-show="showTmAlert"><div class="alert alertwarning">{{
+            tmAlert}}</div></div>
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" ng-click="displayTimeEntry = !displayTimeEntry">
+                    <strong class="ng-binding">{{workOnTimesheet}} Timesheet</strong>
+                    <span class="pull-right" >
+                        <span class="caret" ng-show="!displayTimeEntry"></span>
+                        <span class="caret caret-up" ng-show="displayTimeEntry"></span>
+                    </span>
+                </div>
+                <time-entry editing="editing" work-on-timesheet="workOnTimesheet" newentry="addNewEntry(arg)" edit-entry="editCurrentEntry(arg)" ngshow="displayTimeEntry"></time-entry>
+               
+            </div>
+            <div ng-include src="partials.filter_timesheets"></div>
+        </div>
+        <div class="col-md-8 col-sm-6">
+            <div ng-include src="partials.timesheet_list"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">{{currentUser.usr_desc}}
+        Preferences</strong></div>
+    <form name="form.phase" class="fss-details-form">
+        <ul>
+            <li>Choose Date Range allows you to choose by Defined Time vs. Custom To/From
+                dates.</li>
+            <li ng-show="displayDates">Start Date represents the starting date in all filters.
+                Must be earlier than End Date.</li>
+            <li ng-show="displayDates">End Date represents the finishing date in all filters.
+                Must be later than Start Date.</li>
+            <li>Most Recent Entries represents the most recent number of items within the date
+                range to display. </li>
+        </ul>
+        <div class="form-group row" >
+            <label class="col-xs-2 control-label text-right">Choose Date Range</label>
+            <div class="col-xs-7" >
+                <select name="dateValue"
+                        class="form-control"
+                        ng-change="getDateValue(setPrefs.date_value)"
+                        ng-model="setPrefs.date_value"
+                        ng-options="dateValue.display for dateValue in core.dateValues">
+                </select>
+            </div>
+        </div>
+        <div ng-show="displayDates">
+            <div class="form-group row"
+                 ng-class="(!form.phase.phase_status_date.$valid && editing)? 'has-error' : ''">
+                <label class="col-xs-2 control-label text-right">Start Date</label>
+                <div class="col-xs-7">
+                    <select-date
+                                 inputname="start_date"
+                                 record="currentUser.userId"
+                                 value="setPrefs.start_date"
+                                 max="setPrefs.end_date"
+                                 servicename="prefsService"
+                                 action="updateStartDate"
+                                 date-format="dateFormat">
+                    </select-date>
+                </div>
+            </div>
+            <div class="form-group row"
+                 ng-class="(!form.phase.start_date.$valid && editing)? 'has-error' : ''">
+                <label class="col-xs-2 control-label text-right">End Date</label>
+                <div class="col-xs-7">
+                    <select-date
+                                 inputname="end_date"
+                                 record="currentUser.userId"
+                                 value="setPrefs.end_date"
+                                 min="setPrefs.start_date"
+                                 servicename="prefsService"
+                                 action="updateEndDate"
+                                 date-format="dateFormat">
+                    </select-date>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-2 control-label text-right">Most Recent Entries</label>
+            <edit-input inputtype='number' record="currentUser.userId"
+                        value="setPrefs.last_number_entries" servicename="prefsService"
+                        action="updateLastNumberEntries"></edit-input>
+        </div>
+    </form>
+</div>

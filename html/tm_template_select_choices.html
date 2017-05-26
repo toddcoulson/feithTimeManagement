@@ -1,0 +1,26 @@
+<div>
+    <div class="btn-group btn-group-justified fss-input-date-group fss-float-elementleft"
+         ng-show="editing">
+        <span
+              ng-repeat="status in statuses"
+              class="btn btn-default"
+              ng-model="value"
+              ng-class="(status.value == tmpValue) ? status.btn_class : ''"
+              ng-click="changeStatus(status.value)">
+            {{status.display}}
+        </span>
+    </div>
+    <div ng-show="editing" class="fss-float-element-left" enter-key="submit()">
+        <span ng-click="submit()"><span class="glyphicon glyphicon-ok" ariahidden="
+            true"></span></span>
+        <span ng-click="cancel()"><span class="glyphicon glyphicon-ban-circle" ariahidden="
+            true"></span></span>
+        <!--<form ng-submit="submit()">
+<input type="submit" style="position: absolute; left: -9999px; width: 1px;
+height: 1px;"/>
+</form>-->
+    </div>
+    <div ng-show="!editing">
+        <span class="label" ng-class="displayClass(value)" ngclick="edit()">{{displayStatus(value)}}</span>
+    </div><!--coreService.displayStatus(value)-->
+</div>

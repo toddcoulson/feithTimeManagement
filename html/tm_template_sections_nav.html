@@ -1,0 +1,24 @@
+<div class="panel panel-default hidden-print fss-section-panel">
+    <div class="panel-body">
+        <nav class="navbar navbar-default fss-tm-subnavbar" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbarSubNav" aria-expanded="false" aria-controls="navbarSubNav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbarSubNav" class="navbar-collapse collapse">
+                <ul class="fss-nav-item nav nav-pills nav-stacked">
+                    <li ng-class="path(section)" ng-repeat="section in nav.navItems" >
+                        <a href="" ng-click="gotoSection(section.path)">
+                            {{section.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="fdd-main-nav">
+    <div ng-include src="partials.nav"></div>
+</div>
+<div class="fss-breadcrumb-nav-container">
+    <breadcrumb project="project"
+                phase="phase"
+                level='project' />
+</div>
+<div class="fss-sidebar-content-wrapper fss-sidebar-content-wrapper-pm">
+    <div class="fss-sidebar-nav-container">
+        <sub-nav nav="navs.project"
+                 project="project"
+                 phase="phase"
+                 rootLevel='false'></sub-nav>
+    </div>
+    <div class="fss-body-container">
+        <div>
+            <user-selection-display selected-users="selectedUsers" header-title="Project
+                                                                                 Managers" remove-method="removeProjectManager" element-id="project.project_id" filterdata="
+returnAll"><\user-selection-display>
+                </div>
+                <div class="containerFluid">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-xs-4"><button ngclick="
+                            showAddEmployeeModal()" class="btn btn-primary fss-submission">Add
+                            Managers</button></div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>

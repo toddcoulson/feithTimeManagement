@@ -1,0 +1,19 @@
+<div class="fdd-main-nav">
+    <div ng-include src="partials.nav"></div>
+</div>
+<div class="fss-breadcrumb-nav-container">
+    <breadcrumb project="project"
+                phase="phase"
+                level='phase' />
+</div>
+<div class="fss-sidebar-content-wrapper fss-sidebar-content-wrapper-pm">
+    <div class="fss-sidebar-nav-container">
+        <sub-nav nav="navs.phase"
+                 project="project"
+                 phase="phase"
+                 rootLevel='false'></sub-nav>
+    </div>
+    <div class="fss-body-container">
+        <div ng-include src="partials.roles"></div>
+    </div>
+</div>

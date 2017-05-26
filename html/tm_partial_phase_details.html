@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">{{phase.phase_name}}
+        Details</strong></div>
+    <form name="form.phase" class="fss-details-form">
+        <div class="form-group row">
+            <label class="col-xs-6 col-sm-2 control-label text-right">Phase Name</label>
+            <div class="col-xs-6" >
+                <edit-input record="phase.phase_id" value="phase.phase_name"
+                            servicename="phaseService" action="updatePhaseName"></edit-input>
+            </div>
+        </div>
+        <div class="form-group row" >
+            <label class="col-xs-6 col-sm-2 control-label text-right">Status</label>
+            <div class="col-xs-6" >
+                <select-choices statuses="statuses" record="phase.phase_id"
+                                value="phase.phase_status" servicename="phaseService"
+                                action="updatePhaseStatus"></select-choices>
+            </div>
+        </div>
+        <div class="form-group row"
+             ng-class="(!form.phase.phase_status_date.$valid && editing)? 'has-error' : ''">
+            <label class="col-xs-6 col-sm-2 control-label text-right">Status Date</label>
+            <div class="col-xs-6">
+                {{phase.phase_status_date | date:dateFormat}}
+            </div>
+        </div>
+        <div class="form-group row"
+             ng-class="(!form.phase.start_date.$valid && editing)? 'has-error' : ''">
+            <label class="col-xs-6 col-sm-2 control-label text-right">Start Date</label>
+            <div class="col-xs-6">
+                <select-date
+                             inputname="start_date"
+                             record="phase.phase_id"
+                             value="phase.start_date"
+                             max="phase.end_date"
+                             servicename="phaseService"
+                             action="updateStartDate"
+                             date-format="dateFormat">
+                </select-date>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-6 col-sm-2 control-label text-right">End Date</label>
+            <div class="col-xs-6">
+                <select-date
+                             inputname="end_date"
+                             record="phase.phase_id"
+                             value="phase.end_date"
+                             min="phase.start_date"
+                             servicename="phaseService"
+                             action="updateEndDate"
+                             date-format="dateFormat">
+                </select-date>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-6 col-sm-2 control-label text-right">Description</label>
+            <edit-input class="col-xs-6" record="phase.phase_id" value="phase.description"
+                        servicename="phaseService" action="updateDescription" inputtype="textarea"></editinput>
+        </div>
+        <div class="form-group row" >
+            <label class="col-xs-12 col-sm-2 control-label text-right">Percent Phase
+                Complete</label>
+            <div class="col-xs-12 col-xs-10" >
+                <percentage-complete ng-init="percentComplete()" pvalue="
+                                                                         percentCompletePhase"></percentage-complete>
+            </div>
+        </div>
+    </form>
+</div>

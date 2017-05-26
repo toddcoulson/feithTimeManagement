@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">Add New Role</strong></div>
+    <form name="form.newRole" class="fss-details-form">
+        <div class="form-group row">
+            <label class="col-xs-3 control-label text-right">Role Code</label>
+            <div class="col-xs-9">
+                <input name="role_code" type="text" ng-model="newRole.role_code" class="formcontrol"
+                       ngkeyup="
+                                codeConflict=adminRoleService.checkForCodeMatch(newRole.role_code)"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-3 control-label text-right">Role Name</label>
+            <div class="col-xs-9">
+                <input name="role_name" type="text" ng-model="newRole.role_name" class="formcontrol"
+                       ng-keyup="nameConflict=adminRoleService.checkForNameMatch(newRole.role_code,
+                                 newRole.role_name)"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-3 control-label text-right">Standard Rate</label>
+            <div class="col-xs-9">
+                <input name="standard_rate" type="text" ng-model="newRole.standard_rate"
+                       class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-3 control-label text-right">Clearance Rate</label>
+            <div class="col-xs-9">
+                <input name="clearance_rate" type="text" ng-model="newRole.clearance_rate"
+                       class="form-control"/>
+            </div>
+        </div>
+        <div class="alert alert-danger" ng-show="nameConflict">
+            The name {{newRole.role_name}} is already listed under code: {{newRole.role_code}}
+        </div>
+        <div class="alert alert-danger" ng-show="codeConflict">
+            The code {{newRole.role_code}} is currently in use.
+        </div>
+        <button ng-click="submit()" class="btn btn-default">Submit</button>
+        </div>

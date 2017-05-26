@@ -1,0 +1,8 @@
+SELECT
+DEPARTMENT_ID,
+TASK_NAME,
+DEPT
+FROM fdd.TM2_DEPT_TASK_LOOKUP dt
+INNER JOIN
+fdd.TM_DEPT_LOOKUP d
+ON dt.department_id = d.dept_idx

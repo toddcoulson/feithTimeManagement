@@ -1,0 +1,13 @@
+<div>
+    <div class="modal-body">
+        <div ng-include src='partials.project_details_entry'></div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <div class="col-xs-9">
+                <button class="btn btn-primary fss-submission" ngdisabled="form.project.$invalid" ng-click="submitNewProject()">Submit</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

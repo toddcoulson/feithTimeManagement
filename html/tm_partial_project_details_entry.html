@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong ng-show="!newProject">{{project.project_name}}
+        Details</strong><strong ng-show="newProject">Create New Project</strong></div>
+    <form name="form.project" class="form-horizontal fss-details-form">
+        <div class="form-group" ng-show="newProject" ngclass="(!
+                                                              form.project.selectedCustomer.$valid && editing)? 'has-error' : ''">
+            <label class="control-label col-xs-12 col-sm-3">Customer</label>
+            <div class="col-xs-12 col-sm-9">
+                <select name="selectedCustomer"
+                        chosen="companies"
+                        class="form-control"
+                        ng-model="project.selectedCustomer"
+                        ng-options="customer.name for customer in companies"
+                        ng-required="true">
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ng-class="((!form.project.project_name.$valid && editing))?
+                                          'has-error' : ''">
+            <label class="control-label col-xs-12 col-sm-3">Project Name</label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <input type="text" name="project_name" ng-model="project.project_name"
+                       class="form-control" ng-required="true">
+            </div>
+            <div class="col-xs-12 col-sm-9" ng-show="!editing"><span ngshow="!
+                editing">{{project.project_name}}</span></div>
+        </div>
+        <div class="form-group" >
+            <label class="control-label text-right col-xs-12 col-sm-3">Status</label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="status in statuses"
+                       class="btn btn-default"
+                       ng-class="(status.value == project.project_status) ? status.btn_class : ''"
+                       ng-click="project.project_status = status.value">
+                        {{status.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-3">Description</label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <textarea class="form-control" ng-model="project.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group row" >
+            <label class="col-xs-12 col-sm-3 control-label text-right">Category</label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="category in categories"
+                       class="btn btn-default"
+                       ng-model="project.category"
+                       ng-class="(category.value == project.category) ? category.btn_class : ''"
+                       ng-click="project.category = category.value">
+                        {{category.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-12 col-sm-3 control-label text-right">Price Model</label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="model in priceModels"
+                       class="btn btn-default"
+                       ng-model="project.price_model"
+                       ng-class="(model.value == project.price_model) ? model.btn_class : ''"
+                       ng-click="project.price_model = model.value">
+                        {{model.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Billing Frequency</label>
+            <div class="col-sm-9">
+                <select class="form-control ng-pristine ng-valid"
+                        ng-init="project.billing_frequency = frequencies[0]"
+                        ng-change="getRoleData(time.phase)"
+                        ng-model="project.billing_frequency"
+                        ng-options="frequency.value for frequency in frequencies">
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-12 col-sm-3 control-label text-right"></label>
+            <div class="col-xs-12 col-sm-9" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="bill in billings"
+                       class="btn btn-default"
+                       ng-model="project.bill_type"
+                       ng-class="(bill.value == project.bill_type) ? bill.btn_class : ''"
+                       ng-click="project.bill_type = bill.value">
+                        {{bill.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

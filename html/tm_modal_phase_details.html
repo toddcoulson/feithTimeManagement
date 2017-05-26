@@ -1,0 +1,9 @@
+<div>
+    <div class="modal-body">
+        <div ng-include src='partials.phase_details_entry'></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary fss-submission" ng-click="save()" ngdisabled="form.phase.$invalid">Submit</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

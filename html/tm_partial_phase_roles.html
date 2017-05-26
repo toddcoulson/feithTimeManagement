@@ -1,0 +1,107 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">Budget</strong></div>
+    <div class="panel-body">
+        <span class="col-xs-12"><label class="control-label">Estimated Hours:
+            </label>{{getPhaseHours()}}</span>
+        <span class="col-xs-12"><label class="control-label">Estimated Budget:
+            </label>{{getPhaseBudget() | currency}}</span>
+    </div>
+    <div class="panel-heading"><strong class="ng-binding">{{project.phase_name}}
+        Roles</strong></div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-xs-2">
+                        <span class="fss-sort-click" ng-init="sortType = 'role_code';" ngclick="sortType = 'role_code'; sortReverse = !sortReverse">
+                            Role Code
+                            <span class="caret" ng-show="sortType == 'role_code' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'role_code' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-3">
+                        <span class="fss-sort-click" ng-click="sortType = 'role_name'; sortReverse
+                                                               = !sortReverse">
+                            Role Name
+                            <span class="caret" ng-show="sortType == 'role_name' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'role_name' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-1">
+                        <span class="fss-sort-click" ng-click="sortType = 'classification';
+                                                               sortReverse = !sortReverse">
+                            Classification
+                            <span class="caret" ng-show="sortType == 'classification' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'classification'
+                                                                  && sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-2 text-right">
+                        <span class="fss-sort-click" ng-click="sortType = 'negotiated'; sortReverse = !sortReverse">
+                            Rate
+                            <span class="caret" ng-show="sortType == 'negotiated' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'negotiated' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-2 text-center">
+                        <span class="fss-sort-click" ng-click="sortType = 'role_hours'; sortReverse
+                                                               = !sortReverse">
+                            Role Hours
+                            <span class="caret" ng-show="sortType == 'role_hours' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'role_hours' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-1 text-right">Discount</th>
+                    <th class="col-xs-2 text-right">Role Budget</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ng-scope" ng-repeat="role in phaseRoles |
+                                                orderBy:sortType:sortReverse">
+                    <td>
+                        <span ng-click="removeRole(role)" >
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                    </td>
+                    <td>{{role.role_code}}</td>
+                    <td>{{role.role_name}}</td>
+                    <td>{{role.classification}}</td>
+                    <td class=" text-right"><edit-input record="role.role_id"
+                                                        value="role.negotiated" servicename="roleService" action="updateNegotiated" currencyon="true"></edit-input></td>
+                    <td class=" text-center"><edit-input record="role.role_id"
+                                                         value="role.role_hours" servicename="roleService" action="updateRoleHours"></editinput></
+                        td>
+                    <td class="text-right">{{discountPercent(role) | percentage:2}}</td>
+                    <td class=" text-right">{{getRoleBudget(role) | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="containerFluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-xs-4"><button ngclick="
+            showAddRoleModal('standard')" class="btn btn-primary fss-submission">Add
+            Standard Roles</button></div>
+    </div>
+    <div class="row fss-padding-top">
+        <div class="col-lg-2 col-md-2 col-xs-4"><button ngclick="
+            showAddRoleModal('clearance')" class="btn btn-primary fss-submission">Add
+            Clearance Roles</button></div>
+    </div>
+    <div class="row fss-padding-top">
+        <div class="col-xs-12"><form class="form-inline">Discount all roles by <input type="number" class="input-small" ng-model="allDiscount" min="0" max="100"/>%
+            <button ng-click="discountAll(allDiscount)" class="btn btn-primary fsssubmission">
+                Apply</button></form></div>
+    </div>
+</div>

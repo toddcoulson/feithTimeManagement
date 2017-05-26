@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">Department Tasks</strong></div>
+    <ul class="nav nav-tabs fss-space-minus-bottom" >
+        <li role="presentation" ng-repeat="department in departments" ngclick="onClickTab(department)" ng-class="selectedDepartment.dept === department.dept) ? 'active':''">
+            <a href="">{{department.dept}}</a>
+        </li>
+    </ul>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th ng-show="checkEditAdmin()"></th>
+                    <th class="col-xs-12">Task</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ng-scope" ng-repeat="task in deptTasks | filter:search track by
+                                                $index | orderBy:task_name:false">
+                    <td ng-show="checkEditAdmin()">
+                        <a href="" ng-click="removeDepartmentTask(task)" >
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                    <td>{{task.task_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<button ng-click="addDepartmentTask()" ng-show="checkEditAdmin()" class="btn btndefault
+                                                                         fss-sidebar-nav-action">{{departmentTaskBtn}}</button>
+<div class="alert alert-danger" role="alert" ng-show="duplicate">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{taskWarning}}
+</div>
+<div ng-show="editing">
+    <form ng-submit="submit(newTask)">
+        <div class="input-group">
+            <input input-onblur name="newTask" type="text"
+                   ng-model="newTask" class="form-control"/>
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit" ><span class="glyphicon
+                    glyphicon-ok" aria-hidden="true"></span></button>
+                <button class="btn btn-default" type="button" ng-click="cancel()"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,93 @@
+<div class="panel panel-default">
+    <div class="panel-heading fss-timesheet-header">
+        <div class="pull-left">
+            <strong >Recent Time Sheets {{forWho}}</strong>
+        </div>
+        <div class="pull-right">
+            <span class="pull-left">
+                <select name="sortSelect"
+                        class="form-control"
+                        ng-change="selectedSort()"
+                        ng-model="sortType.selected"
+                        ng-init="sortType.selected=sorts[0]"
+                        ng-options="sort.name for sort in sorts">
+                </select>
+            </span>
+            <span class="fss-space-left-side pull-left">
+                <button class="btn btn-primary fss-submission" ngclick="exportData()">Export</button>
+            </span>
+        </div>
+    </div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped fss-time-entry-grid">
+            <tbody>
+                <tr ng-repeat="entry in entriesDisplay | filter:search |
+                               filter:core.getSearchAll() | filter:filterEntryHours | orderBy:sortType.name:true |
+                               limitTo:searchEntry.limitEntries">
+                    <td>
+                        <div class="row" ng-show="showOnMain">
+                            <div class="col-xs-12" >
+                                <button ng-click="getMeStarted(entry)" class="btn btn-primary fsssubmission btn-xs" data-container="body" tooltip="Get Me Started"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <span ng-click="editEntry(entry)" class="btn btn-xs fss-sort-click lightLink"><span class="glyphicon glyphicon-pencil"></span></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-xs-12 col-sm-6 fss-name-block">
+                            <div>
+                                <span class="fss-phase-name" >
+                                    {{entry.phase_name}}
+                                </span> |
+                                <span class="fss-project-name" >
+                                    {{entry.project_name}}
+                                </span>
+                            </div>
+                            <span class="fss-customer-name" >
+                                {{entry.company_name}}
+                            </span> |
+                            <span class="fss-role-code" >
+                                {{entry.role_code}}
+                            </span> |
+                            <span class="fss-role-code" >
+                                {{entry.task_name}}
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 fss-time-block">
+                            <div class="fss-type-entry-label fss-hour-type-combo">
+                                <div>
+                                    <span class="fss-type-of-hours" >
+                                        {{entry.type_of_hours}}
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="label label-xs" ngclass="core.checkTypeOfHoursColor(entry.type_of_hours)"><span class="glyphicons
+                                        glyphicons-sm" ngclass="
+                                        core.checkTypeOfHoursIcon(entry.type_of_hours)"></span></button>
+                                </div>
+                            </div>
+                            <span class="fss-hours-worked" >
+                                {{entry.hours_worked}}
+                            </span>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 fss-date-block">
+                            <div class="col-xs-12 fss-entry-date fss-col-date fss-text-right" >
+                                {{entry.entry_date | date:dateFormat}}
+                            </div>
+                            <div class="col-xs-12 fss-submission-time fss-col-date fss-text-right" >
+                                {{entry.submit_date | date:dateTimeFormat}}
+                            </div>
+                            <div class="col-xs-12 fss-submission-time fss-col-date fss-text-right" nghide="showOnMain">
+                                {{entry.usr_desc}}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 fss-comments">{{entry.comments}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

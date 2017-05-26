@@ -1,0 +1,78 @@
+<div class="panel panel-default" >
+    <div class="panel-heading"><strong class="ng-binding">Display
+        Companies</strong></div>
+    <table class="table table-striped fss-interactive-table">
+        <thead>
+            <tr>
+                <th class="col-xs-3">
+                    <span class="fss-sort-click" ng-init="sortType = 'company_name';" ngclick="sortType = 'company_name'; sortReverse = !sortReverse">
+                        Company
+                        <span class="caret" aria-hidden="true" ng-show="sortType == 'company_name'
+                                                                        && !sortReverse"></span>
+                        <span class="caret caret-up" aria-hidden="true" ng-show="sortType ==
+                                                                                 'company_name' && sortReverse"></span>
+                    </span>
+                    <input name="role_code" type="text" ng-model="search.company_name"
+                           class="form-control"/>
+                </th>
+                <th class="col-xs-3">
+                    <span class="fss-sort-click" ng-click="sortType = 'project_name'; sortReverse
+                                                           = !sortReverse">
+                        Project
+                        <span class="caret" aria-hidden="true" ng-show="sortType == 'project_name'
+                                                                        && !sortReverse"></span>
+                        <span class="caret caret-up" aria-hidden="true" ng-show="sortType ==
+                                                                                 'project_name' && sortReverse"></span>
+                    </span>
+                    <input name="role_code" type="text" ng-model="search.project_name"
+                           class="form-control"/>
+                </th>
+                <th class="col-xs-1">
+                    <span class="fss-sort-click" ng-click="sortType = 'project_status';
+                                                           sortReverse = !sortReverse">
+                        Status
+                        <span class="caret" aria-hidden="true" ng-show="sortType ==
+                                                                        'project_status' && !sortReverse"></span>
+                        <span class="caret caret-up" aria-hidden="true" ng-show="sortType ==
+                                                                                 'project_status' && sortReverse"></span>
+                    </span>
+                </th>
+                <th class="col-xs-2">
+                    <span class="fss-sort-click" ng-click="sortType = 'status_date'; sortReverse
+                                                           = !sortReverse">
+                        Status Date
+                        <span class="caret" aria-hidden="true" ng-show="sortType == 'status_date'
+                                                                        && !sortReverse"></span>
+                        <span class="caret caret-up" aria-hidden="true" ng-show="sortType ==
+                                                                                 'status_date' && sortReverse"></span>
+                    </span>
+                </th>
+                <th class="col-xs-3">
+                    <span class="fss-sort-click" ng-click="sortType = 'percentProject';
+                                                           sortReverse = !sortReverse">
+                        Completion
+                        <span class="caret" aria-hidden="true" ng-show="sortType ==
+                                                                        'percentProject' && !sortReverse"></span>
+                        <span class="caret caret-up" aria-hidden="true" ng-show="sortType ==
+                                                                                 'percentProject' && sortReverse"></span>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="project in projects | filter:search |
+                           orderBy:sortType:sortReverse" ng-click="core.newLocation(project.project_id, -1,
+                                                                   '/phase-list')"> <!--ng-repeat="company in companies | filter:filterFn"-->
+                <td>{{project.company_name}}</td>
+                <td>{{project.project_name}}</td>
+                <td><span class="label" ngclass="
+                    getStatusClass(project.project_status)">{{core.displayStatus(project.project_sta
+                    tus)}}</span></td>
+                <td>{{project.status_date | date:dateFormat}}</td>
+                <td>
+                    <percentage-complete p-value="project.percentProject"></percentagecomplete>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

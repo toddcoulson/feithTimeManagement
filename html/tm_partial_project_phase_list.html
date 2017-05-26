@@ -1,0 +1,79 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">{{project.project_name}}
+        Phases</strong></div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped fss-interactive-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-xs-3">
+                        <span class="fss-sort-click" ng-init="sortType = 'phase_name';" ngclick="sortType = 'phase_name'; sortReverse = !sortReverse">
+                            Phase Name
+                            <span class="caret" ng-show="sortType == 'phase_name' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'phase_name' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-2">
+                        <span class="fss-sort-click" ng-click="sortType = 'phase_status';
+                                                               sortReverse = !sortReverse">
+                            Status
+                            <span class="caret" ng-show="sortType == 'phase_status' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'phase_status' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-2">
+                        <span class="fss-sort-click" ng-click="sortType = 'start_date'; sortReverse
+                                                               = !sortReverse">
+                            Start Date
+                            <span class="caret" ng-show="sortType == 'start_date' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'start_date' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-2">
+                        <span class="fss-sort-click" ng-click="sortType = 'end_date'; sortReverse =
+                                                               !sortReverse">
+                            End Date
+                            <span class="caret" ng-show="sortType == 'end_date' &&
+                                                         !sortReverse"></span>
+                            <span class="caret caret-up" ng-show="sortType == 'end_date' &&
+                                                                  sortReverse"></span>
+                        </span>
+                    </th>
+                    <th class="col-xs-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ng-scope" ng-repeat="phase in phases | orderBy:sortType:sortReverse"
+                    ng-click="core.newLocation(project.project_id, phase.phase_id, '/details')"
+                    uibTooltip="Select Phase">
+                    <td>
+                        <span ng-click="removePhase(phase)" ng-show="phase.hours_worked == 0">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </span>
+                    </td>
+                    <td>{{phase.phase_name}}</td>
+                    <td><span class="label" ngclass="core.displayStatusClass(phase.phase_status)">{{core.displayStatus(phase.phase_status)}}</span></td>
+                    <td>{{phase.start_date | date:dateFormat}}</td>
+                    <td>{{phase.end_date | date:dateFormat}}</td>
+                    <td>
+                        <percentage-complete pvalue="phase.hours_worked_percent"></percentage-complete>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-group" >
+    <label class="control-label text-right col-xs-12 col-sm-2">Percent Project
+        Complete</label>
+    <div class="col-xs-12 col-sm-10">
+        <percentage-complete p-value="percentProject"></percentage-complete>
+    </div>
+</div>
+</div>

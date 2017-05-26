@@ -1,0 +1,73 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Create New Phase</strong></div>
+    <form name="form.phase" class="fss-details-form">
+        <div class="form-group row"
+             ng-class="(!form.phase.phase_name.$valid && editing)? 'has-error' : ''">
+            <label class="col-xs-3 control-label text-right">Phase Name</label>
+            <div class="col-xs-9">
+                <input name="phase_name" type="text" ng-model="phase.phase_name" class="formcontrol"
+                       data-required="true"/>
+            </div>
+        </div>
+        <div class="form-group row" >
+            <label class="col-xs-3 control-label text-right">Status</label>
+            <div class="col-xs-9">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="status in statuses"
+                       class="btn btn-default"
+                       ng-model="phase.phase_status"
+                       ng-class="(status.value == phase.phase_status) ? status.btn_class : ''"
+                       ng-click="phase.phase_status = status.value">
+                        {{status.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row"
+             ng-class="(!form.phase.start_date.$valid && editing)? 'has-error' : ''">
+            <label class="col-xs-3 control-label text-right">Start Date</label>
+            <div class="col-xs-9">
+                <div class="input-group" >
+                    <input name="start_date" type="text" class="form-control" ngmodel="phase.start_date"
+                           datepicker-popup="{{$parent.dateFormat}}"
+                           is-open="datepickers.start_date"
+                           max="$parent.phase.end_date"
+                           datepicker-options="{{$parent.gcs.dateOptions}}"
+                           close-text="Close"
+                           data-required="true"></input>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ngclick="openDatePicker($event,'start_date');">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        </div>
+    <div class="form-group row">
+        <label class="col-xs-3 control-label text-right">End Date</label>
+        <div class="col-xs-9">
+            <div class="input-group" >
+                <input name="end_date" type="text" class="form-control" ngmodel="phase.end_date"
+                       datepicker-popup="{{$parent.dateFormat}}"
+                       is-open="datepickers.end_date"
+                       min="$parent.phase.start_date"
+                       datepicker-options="{{$parent.gcs.dateOptions}}"
+                       close-text="Close"></input>
+            <span class="input-group-btn">
+                <button class="btn btn-default" ngclick="
+                                                         openDatePicker($event,'end_date');">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-xs-3 control-label text-right">Description</label>
+    <div class="col-xs-9">
+        <textarea class="form-control" rows="5" ngmodel="phase.description"></textarea>
+    </div>
+</div>
+</form>
+</div>

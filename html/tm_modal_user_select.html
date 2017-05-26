@@ -1,0 +1,71 @@
+<div class="panel panel-default">
+    <div>
+        <div class="panel-heading"><strong class="ng-binding" ng-show="!newPhase">Add/Remove
+            Users</strong></div>
+        <div class="fss-role-table">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-xs-1"></th>
+                        <th class="col-xs-2">
+                            <span class="fss-sort-click" ng-click="sortType = 'usr_name'; sortReverse =
+                                                                   !sortReverse">
+                                User Name
+                                <span class="caret" ng-show="sortType == 'usr_name' && !sortReverse"></span>
+                                <span class="caret caret-up" ng-show="sortType == 'usr_name' && sortReverse"></span>
+                            </span>
+                            <input name="usr_name" type="text" ng-model="search.usr_name" class="formcontrol"/>
+                        </th>
+                        <th class="col-xs-3">
+                            <span class="fss-sort-click" ng-click="sortType = 'usr_desc'; sortReverse = !sortReverse">
+                                User Description
+                                <span class="caret" ng-show="sortType == 'usr_desc' && !sortReverse"></span>
+                                <span class="caret caret-up" ng-show="sortType == 'usr_desc' &&
+                                                                      sortReverse"></span>
+                            </span>
+                            <input name="usr_desc" type="text" ng-model="search.usr_desc" class="formcontrol"/>
+                        </th>
+                        <th class="col-xs-3">
+                            <span class="fss-sort-click" ng-click="sortType = 'usr_email'; sortReverse
+                                                                   = !sortReverse">
+                                User Email
+                                <span class="caret" ng-show="sortType == 'usr_email' &&
+                                                             !sortReverse"></span>
+                                <span class="caret caret-up" ng-show="sortType == 'usr_email' &&
+                                                                      sortReverse"></span>
+                            </span>
+                            <input name="usr_email" type="text" ng-model="search.usr_email"
+                                   class="form-control"/>
+                        </th>
+                        <th class="col-xs-3">
+                            User Type
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:search">
+                        <td>
+                            <span ng-click="user.selected = !user.selected" class="fss-sort-click">
+                                <span class="glyphicon glyphicon-unchecked" aria-hidden="true" ngshow="!user.selected"></span>
+                                <span class="glyphicon glyphicon-check" aria-hidden="true" ngshow="user.selected"></span>
+                            </span>
+                        </td>
+                        <td>{{user.usr_desc}}</td>
+                        <td>{{user.usr_name}}</td>
+                        <td>{{user.usr_email}}</td>
+                        <td>
+                            <a href="" ng-click="changeUserType(user)" >
+                                <span class="label label-success" ng-class="'fss-status-pending'" ngmodel="user.is_developer" ng-show="!user.is_developer">Tester</span>
+                                <span class="label label-success" ng-class="'fss-status-pending'" ngmodel="user.is_developer" ng-show="user.is_developer">Developer</span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary fss-submission" ng-click="submit()">Add
+                users</button>
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>

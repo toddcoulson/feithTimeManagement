@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default fss-tm-navbar" >
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" datatarget="#
+                                                                                                 navbarMainNav" aria-expanded="false" aria-controls="navbarMainNav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div id="navbarMainNav" class="navbar-collapse collapse">
+        <ul class="fss-nav-item nav nav-pills">
+            <li ng-class="path(tmNav)" ng-repeat="tmNav in tmNavs" >
+                <a href="" ng-click="goRootNav(tmNav.path)">{{tmNav.title}}</a>
+            </li>
+        </ul>
+    </div>
+</nav>

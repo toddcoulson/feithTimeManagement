@@ -1,0 +1,118 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong ng-show="!newProject">{{project.project_name}}
+        Details</strong><strong ng-show="newProject">Create New Project</strong></div>
+    <form name="form.project" class="form-horizontal fss-details-form">
+        <div class="form-group" ng-class="((!form.project.project_name.$valid && editing))?
+                                          'has-error' : ''">
+            <label class="control-label col-xs-12 col-sm-2">Project Name</label>
+            <div class="col-xs-12 col-sm-6" ng-show="!editing">
+                <edit-input record="project.project_id" value="project.project_name"
+                            servicename="projectService" action="updateProjectName"></edit-input>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="control-label text-right col-xs-12 col-sm-2">Project Managers</label>
+            <div class="col-xs-12 col-sm-6">
+                <span ng-repeat="pm in projectManagers">{{pm.usr_desc}}{{$last ? '' : ','}}</span>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="control-label text-right col-xs-12 col-sm-2">Status</label>
+            <div class="col-xs-12 col-sm-6">
+                <select-choices statuses="statuses" record="project.project_id"
+                                value="project.project_status" servicename="projectService"
+                                action="updateProjectStatus"></select-choices>
+            </div>
+        </div>
+        <div class="form-group" ng-class="(!form.project.status_date.$valid && editing)?
+                                          'has-error' : ''">
+            <label class="text-right control-label col-xs-12 col-sm-2">Status Date</label>
+            <div class="col-xs-6">
+                {{project.status_date | date:dateFormat}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2 text-right ">Description</label>
+            <div class="col-xs-12 col-sm-6">
+                <edit-input record="project.project_id" value="project.description"
+                            servicename="projectService" action="updateDescription" inputtype="textarea"></editinput>
+            </div>
+        </div>
+        <div class="form-group row" >
+            <label class="col-xs-12 col-sm-2 control-label text-right ">Category</label>
+            <div class="col-xs-12 col-sm-6" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="category in categories"
+                       class="btn btn-default"
+                       ng-model="project.category"
+                       ng-class="(category.value == project.category) ? 'active' : ''"
+                       ng-click="project.category = category.value">
+                        {{category.display}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6" ng-show="!editing">
+                <select-choices statuses="categories" record="project.project_id"
+                                value="project.category" servicename="projectService" action="updateCategory"></selectchoices>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-12 col-sm-2 control-label text-right ">Price Model</label>
+            <div class="col-xs-12 col-sm-6" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="model in priceModels"
+                       class="btn btn-default"
+                       ng-model="project.price_model"
+                       ng-class="(model.value == project.price_model) ? 'active' : ''"
+                       ng-click="project.price_model = model.value">
+                        {{model.display}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <select-choices statuses="priceModels" record="project.project_id"
+                                value="project.price_model" servicename="projectService"
+                                action="updatePriceModel"></select-choices>
+                <!--<span ng-show="!editing">{{project.price_model}}</span>-->
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-12 col-sm-2 control-label text-right ">Billing
+                Frequency</label>
+            <div class="col-xs-12 col-sm-6">
+                <select-choices statuses="frequencies" record="project.project_id"
+                                value="project.billing_frequency" servicename="projectService"
+                                action="updateBillingFrequency"></select-choices>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-12 col-sm-2 control-label text-right ">Bill Type</label>
+            <div class="col-xs-12 col-sm-6" ng-show="editing">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="bill in billings"
+                       class="btn btn-default"
+                       ng-model="project.bill_type"
+                       ng-class="(bill.value == project.bill_type) ? 'active' : ''"
+                       ng-click="project.bill_type = bill.value">
+                        {{bill.display}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <select-choices statuses="billings" record="project.project_id"
+                                value="project.bill_type" servicename="projectService"
+                                action="updateBillType"></select-choices>
+            </div>
+        </div>
+        <div class="form-group" >
+            <label class="control-label text-right col-xs-12 col-sm-2">Percent Project
+                Complete</label>
+            <div class="col-xs-12 col-sm-10">
+                <percentage-complete p-value="percentProject"></percentage-complete>
+            </div>
+        </div>
+    </form>
+</div>

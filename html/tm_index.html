@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tmApp">
+    <head>
+        <meta charset="UTF-8">
+        <title>Feith Time Management</title>
+        <link href="object/jquery.growl.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="object/bootstrap.css"></link>
+    <link rel="stylesheet" type="text/css" href="object/glyphicons.css"></link>
+<link rel="stylesheet" type="text/css" href="object/fah.css"></link>
+<link rel="stylesheet" type="text/css" href="object/chosen.css"></link>
+<link rel="stylesheet" type="text/css" href="object/chosen-bootstrap.css"></link>
+<link rel="stylesheet" type="text/css" href="object/font-awesome.css"></link>
+<link rel="stylesheet" type="text/css" href="object/tm.css"></link>
+<script type="text/javascript" src="object/jquery.js"></script>
+<script type="text/javascript" src="object/jquery.growl.js"></script>
+<script type="text/javascript" src="object/chosen.jquery.js"></script>
+<script type="text/javascript" src="object/angular.min.js"></script>
+<script type="text/javascript" src="object/angular-resource.min.js"></script>
+<script type="text/javascript" src="object/angular-route.min.js"></script>
+<script type="text/javascript" src="object/angular-animate.min.js"></script>
+<script type="text/javascript" src="object/alasql.min.js"></script>
+<script type="text/javascript" src="object/xlsx.core.min.js"></script>
+<script type="text/javascript" src="object/bootstrap.js"></script>
+<script type="text/javascript" src="object/ui-bootstrap-tpls-0100.js"></script>
+<script type="text/javascript" src="object/fdd_authentication.js"></script>
+<script type="text/javascript" src="object/fdd_authorization.js"></script>
+<script type="text/javascript" src="object/fdd_helper_functions.js"></script>
+<script type="text/javascript" src="object/tm_index.js"></script>
+<script type="text/javascript" src="object/tm_service_phase.js"></script>
+<script type="text/javascript" src="object/tm_service_project.js"></script>
+<script type="text/javascript" src="object/tm_service_customers.js"></script>
+<script type="text/javascript" src="object/tm_factory_new_id.js"></script>
+<script type="text/javascript" src="object/tm_service_core.js"></script>
+<script type="text/javascript" src="object/tm_service_role.js"></script>
+<script type="text/javascript" src="object/tm_service_admin_role.js"></script>
+<script type="text/javascript" src="object/tm_service_users.js"></script>
+<script type="text/javascript" src="object/tm_service_department_tasks.js"></script>
+<script type="text/javascript" src="object/tm_service_time_entry.js"></script>
+<script type="text/javascript" src="object/tm_service_preferences.js"></script>
+<script type="text/javascript" src="object/tm_controller.js"></script>
+<script type="text/javascript" src="object/tm_controller_time_entry.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_company_project.js"></script>
+<script type="text/javascript" src="object/tm_controller_phase_details.js"></script>
+<script type="text/javascript" src="object/tm_controller_phase_roles.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_phase_employees.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_phase_reporting.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_phase_preferences.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_phase_timesheets.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_project_phase_list.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_project_reporting.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_project_details.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_project_managers.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_project_timesheets.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_department_tasks.js"></script>
+<script type="text/javascript" src="object/tm_controller_my_projects.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_all_timesheets.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_personal_reporting.js"></script>
+<script type="text/javascript"
+        src="object/tm_controller_personal_preferences.js"></script>
+<script type="text/javascript" src="object/tm_controller_admin_roles.js"></script>
+<script type="text/javascript" src="object/tm_controller_time_filter.js"></script>
+<script type="text/javascript" src="object/fah_directive.js"></script>
+<script type="text/javascript" src="object/tm_filter_percentage.js"></script>
+<script type="text/javascript" src="object/tm_directive_subnavigation.js"></script>
+<script type="text/javascript" src="object/tm_directive_breadcrumb.js"></script>
+<script type="text/javascript" src="object/tm_directive_edit_input.js"></script>
+<script type="text/javascript"
+        src="object/tm_directive_user_selection_display.js"></script>
+<script type="text/javascript"
+        src="object/tm_directive_project_display.js"></script>
+<script type="text/javascript" src="object/tm_directive_input_onblur.js"></script>
+<script type="text/javascript"
+        src="object/tm_directive_select_choices.js"></script>
+<script type="text/javascript" src="object/tm_directive_select_date.js"></script>
+<script type="text/javascript" src="object/tm_directive_affix.js"></script>
+<script type="text/javascript"
+        src="object/tm_directive_angular_chosen.js"></script>
+<script type="text/javascript" src="object/tm_directive_enter_key.js"></script>
+<script type="text/javascript"
+        src="object/tm_directive_percentage_complete.js"></script>
+<script type="text/javascript" src="object/tm_directive_time_entry.js"></script>
+</head>
+<body ng-controller="MainController">
+    <div login-dialog="" ng-if="routeName != 'loginPage' && (!!currentUser ||
+                                config.application.login_type=='internal')" allow-keychain-save="false"></div>
+    <div feith-apps-header header-settings="{{headerSettings}}"></div>
+    <div ng-view class="fss-tm-project-container"></div>
+</body>
+</html>

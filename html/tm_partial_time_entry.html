@@ -1,0 +1,158 @@
+<form novalidate name="form.entry" class="form-horizontal ng-scope ng-valid ng-dirty">
+    <div class="panel-heading" ng-show="useModal">
+        <strong class="ng-binding">Edit Timesheet</strong>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-11 col-sm-4 control-label">Date</label>
+        <div class="col-xs-6 col-sm-4">
+            <div class="datepicker-div">
+                <input name="cal" type="text" class="form-control fss-input-inline" ngmodel="time.date" ng-change='getHoursEmployeeDate(time.date)'
+                       datepicker-popup="{{$parent.dateFormat}}"
+                       is-open="datepickers.cal"
+                       ng-click="open($event, 'cal')"
+                       datepicker-options="{{$parent.gcs.dateOptions}}"
+                       close-text="Close"></input>
+            <span class="input-group-btn fss-inline-block">
+                <button class="btn btn-default fss-calendar-button" href="" ngclick="open($event, 'cal')">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 text-right">
+        <ng-pluralize count="hoursOnDay" when="{
+                                               '0': 'zero hours',
+                                               '1': '1 hour',
+                                               'other': '{{hoursOnDay}} hours'}">
+        </ng-pluralize>
+    </div>
+    <span ng-click="preserve.date.selected = !preserve.date.selected">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.date.selected"
+           tooltip="preserve date on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.date.selected"></i>
+    </span>
+    </div>
+<div class="form-group" ng-class="(form.entry.customer_sel.$error.required)? 'haserror' : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Customer</label>
+    <div class="col-xs-11 col-sm-7">
+        <select name="customer_sel"
+                ng-required="true"
+                class="form-control ng-pristine ng-valid"
+                style="width:100%;"
+                ng-change="getProjectData(time.company)"
+                ng-model="time.company"
+                ng-options="customer.name for customer in companies">
+        </select>
+    </div>
+    <span ng-click="toggleCustomer()">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.customer.selected"
+           tooltip="preserve customer on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ngshow="
+                                                         preserve.customer.selected"></i>
+    </span>
+</div>
+<div class="form-group" ng-class="(form.entry.project_sel.$error.required)? 'haserror'
+                                  : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Project</label>
+    <div class="col-xs-11 col-sm-7">
+        <select class="form-control" ng-pristine ng-valid name="project_sel" ngrequired="true"
+                ng-change="getPhaseData(time.project)"
+                ng-model="time.project"
+                ng-options="project.project_name group by project.project_status_display for
+                            project in projects">
+        </select>
+    </div>
+    <span ng-click="toggleProject()">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.project.selected"
+           tooltip="preserve project on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.project.selected"></i>
+    </span>
+</div>
+<div class="form-group" ng-class="(form.entry.phase_sel.$error.required)? 'has-error' : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Phase</label>
+    <div class="col-xs-11 col-sm-7">
+        <select class="form-control ng-pristine ng-valid" name="phase_sel" ngrequired="true"
+                ng-change="getRoleData(time.phase)"
+                ng-model="time.phase"
+                ng-options="phase.phase_name group by phase.phase_status_display for phase in
+                            phases">
+        </select>
+    </div>
+    <span ng-click="togglePhase()">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.phase.selected"
+           tooltip="preserve phase on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.phase.selected"></i>
+    </span>
+</div>
+<div class="form-group" ng-class="(form.entry.role_sel.$error.required)? 'has-error'
+                                  : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Role Code</label>
+    <div class="col-xs-11 col-sm-7">
+        <!--ng-change="getRoleData(selectedPhase)" -->
+        <select class="form-control ng-pristine ng-valid" name="role_sel" ngrequired="true"
+                ng-model="time.role"
+                ng-options="role.role_name for role in roles">
+        </select>
+    </div>
+    <span ng-click="toggleRole()">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.role.selected"
+           tooltip="preserve role on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.role.selected"></i>
+    </span>
+</div>
+<div class="form-group" ng-class="(form.entry.hours_worked_txt.$error.required)?
+                                  'has-error' : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Hours Worked</label>
+    <div class="col-xs-11 col-sm-7">
+        <div class="input-group">
+            <input type="number" step="0.25" min="0" max="24" class="form-control" ngmodel="time.hours_worked" name="hours_worked_txt" ng-required="true">
+            <span class="input-group-btn">
+                <button type="button" ng-repeat="th in core.types_of_hours" class="btn btndefault fss-type-of-btn" ng-class="(time.type_of_hours == th.value) ? th.btnClass :'btn-default'" ng-click="time.type_of_hours = th.value" tooltip={{th.display}}><span
+class="glyphicons glyphicons-sm {{th.iconClass}}"></span></button>
+            </span>
+        </div>
+    </div>
+    <span ng-click="preserve.hours.selected = !preserve.hours.selected">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.hours.selected"
+           tooltip="preserve hours on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.hours.selected"></i>
+    </span>
+</div>
+<div class="form-group">
+    <label class="col-xs-12 col-sm-4 control-label">Task</label>
+    <div class="col-xs-11 col-sm-7">
+        <select name="task_sel"
+                class="form-control ng-valid ng-dirty"
+                ng-model="time.task"
+                ng-options="t.task_name for t in tasks"></select>
+    </div>
+    <span ng-click="preserve.task.selected = !preserve.task.selected">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.task.selected"
+           tooltip="preserve task on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.task.selected"></i>
+    </span>
+</div>
+<div class="form-group" ng-class="(!form.entry.details_entry.$valid)? 'has-error' : ''">
+    <label class="col-xs-12 col-sm-4 control-label">Details</label>
+    <div class="col-xs-11 col-sm-7">
+        <textarea name="details_entry"
+                  class="form-control"
+                  placeholder="Details" style="height: 80px;"
+                  ng-model="time.comments" ng-required="true"></textarea>
+    </div>
+    <span ng-click="preserve.details.selected = !preserve.details.selected">
+        <i class="fa fa-unlock" aria-hidden="true" ng-show="!preserve.details.selected"
+           tooltip="preserve details on submit"></i>
+        <i class="fa fa-lock" aria-hidden="true" ng-show="preserve.details.selected"></i>
+    </span>
+</div>
+<div class="form-group">
+    <div class="col-sm-11" style="text-align:right;">
+        <div class="ng-scope">
+            <button class="btn btn-primary fss-submission" ng-click="submit()" ngdisabled="form.entry.$invalid">Submit</button>
+            <span class="btn btn-default" ng-click="clear()" nghide="useModal">Clear</span>
+            <span class="btn btn-default" ng-click="close()" ngshow="useModal">Close</span>
+        </div>
+    </div>
+</div>
+</form>

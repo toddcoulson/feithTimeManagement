@@ -1,0 +1,74 @@
+<div class="panel panel-default fss-selection-form">
+    <div class="panel-heading"><strong class="ng-binding" ng-show="!newPhase">Add
+        {{classDisplay}} Roles</strong></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-xs-1"></th>
+                <th class="col-xs-3">
+                    <span class="fss-sort-click" ng-init="sortType = 'role_code';" ngclick="
+                                                                                            sortType = 'role_code'; sortReverse = !sortReverse">
+                        Role Code
+                        <span class="caret" ng-show="sortType == 'role_code' &&
+                                                     !sortReverse"></span>
+                        <span class="caret caret-up" ng-show="sortType == 'role_code' && sortReverse"></span>
+                    </span>
+                    <input name="role_code" type="text" ng-model="search.role_code"
+                           class="form-control"/>
+                </th>
+                <th class="col-xs-4">
+                    <span class="fss-sort-click" ng-click="sortType = 'role_name'; sortReverse = !sortReverse">
+                        Role Name
+                        <span class="caret" ng-show="sortType == 'role_name' &&
+                                                     !sortReverse"></span>
+                        <span class="caret caret-up" ng-show="sortType == 'role_name' && sortReverse"></span>
+                    </span>
+                    <input name="role_name" type="text" ng-model="search.role_name" class="form-control"/>
+                </th>
+                <th class="col-xs-4">
+                    <span class="fss-sort-click" ng-click="sortType = classification +'_rate'; sortReverse = !sortReverse">
+                        <span ng-show="classification == 'standard'">Standard Rate</span>
+                        <span ng-show="classification == 'clearance'">Clearance Rate</span>
+                        <span class="caret" ng-show="sortType == classification +'_rate' &&
+                                                     !sortReverse"></span>
+                        <span class="caret caret-up" ng-show="sortType == classification
+                                                              +'_rate' && sortReverse"></span>
+                    </span>
+                    <div class="form-group row">
+                        <div class="col-xs-3 text-right">From:</div>
+                        <div class="col-xs-9"><input name="phase_name" type="number" ngmodel="
+                            searchRate.min_rate" class="form-control"/></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-3 text-right">To:</div>
+                        <div class="col-xs-9"><input name="phase_name" type="number" ngmodel="
+                            searchRate.max_rate" class="form-control col-xs-3"/></div>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <div class="fss-role-table">
+            <tbody>
+                <tr ng-repeat="role in roles | filter:search | filter:filterRange |
+                               orderBy:sortType:sortReverse">
+                    <td class="col-xs-1 text-center">
+                        <span ng-click="role.selected = !role.selected">
+                            <span class="glyphicon glyphicon-unchecked" aria-hidden="true" ngshow="!role.selected"></span>
+                            <span class="glyphicon glyphicon-check" aria-hidden="true" ngshow="role.selected"></span>
+                        </span>
+                    </td>
+                    <td class="col-xs-3">{{role.role_code}}</td>
+                    <td class="col-xs-4">{{role.role_name}}</td>
+                    <td class="col-xs-4 text-right">
+                        <span ng-show="classification == 'standard'">{{role.standard_rate | currency}}</span>
+                        <span ng-show="classification == 'clearance'">{{role.clearance_rate | currency}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </div>
+    </table>
+    <div class="modal-footer">
+        <button class="btn btn-primary fss-submission" ng-click="submit()" ngdisabled="form.roles.$invalid">Add Roles</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

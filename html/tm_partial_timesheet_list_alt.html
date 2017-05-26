@@ -1,0 +1,114 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">Recent Time Sheets
+        {{forWho}}</strong></div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped fss-time-entry-grid">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-xs-1 date">
+                        <div class="row">
+                            <div class="col-xs-12 fss-entry-date" >
+                                Entry Date
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-submission-time" >
+                                Submission Time
+                            </div>
+                        </div>
+                    </th>
+                    <th class="col-xs-1">
+                        <div class="row">
+                            <div class="col-xs-12 fss-hours-worked text-center" >
+                                Hours
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-type-of-hours text-center" >
+                                Type
+                            </div>
+                        </div>
+                    </th>
+                    <th class="col-xs-4">
+                        <div class="row">
+                            <div class="col-xs-12 fss-customer-name" >
+                                Customer
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-project-name" >
+                                Project | Phase
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-role-code" >
+                                Role Code
+                            </div>
+                        </div>
+                    </th>
+                    <th class="col-xs-5 fss-comments">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entry in entries">
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <button ng-click="getMeStarted(entry)" class="btn btn-primary fsssubmission btn-xs" tooltip="Get Me Started"><span class="glyphicon glyphicon-chevronleft"></
+                                    span></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <span ng-click="editEntry(entry)" class="btn btn-xs fss-sort-click lightLink"><span class="glyphicon glyphicon-pencil"></span></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-xs-12 fss-entry-date fss-col-date" >
+                            {{entry.entry_date | date:dateFormat}}
+                        </div>
+                        <div class="col-xs-12 fss-submission-time fss-col-date" >
+                            {{entry.submit_date | date:dateTimeFormat}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12 fss-hours-worked text-center" >
+                                {{entry.hours_worked}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-type-of-hours text-center" >
+                                {{entry.type_of_hours}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-type-entry-label text-center">
+                                <span class="label label-xs" ngclass="checkTypeOfHoursColor(entry.type_of_hours)"><span class="glyphicons glyphiconssm" ng-class="checkTypeOfHoursIcon(entry.type_of_hours)"></span></button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12 fss-customer-name" >
+                                {{entry.company_name}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-project-name" >
+                                {{entry.project_name}} | {{entry.phase_name}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 fss-role-code" >
+                                {{entry.role_code}}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="fss-comments">{{entry.comments}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

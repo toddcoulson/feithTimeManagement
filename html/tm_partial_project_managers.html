@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-heading"><strong class="ng-binding">{{project.project_name}}
+        Project Managers</strong></div>
+    <div class="table-responsive ng-scope">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-xs-1"></th>
+                    <th class="col-xs-11">Managers on Project</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="ng-scope" ng-repeat="user in phaseManagers">
+                    <td>
+                        <a href="" ng-click="removeProjectManager(user)" >
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                    <td>{{user.usr_name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

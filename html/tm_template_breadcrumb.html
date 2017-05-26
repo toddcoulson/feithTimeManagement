@@ -1,0 +1,21 @@
+<div>
+    <div class="btn-group btn-breadcrumb">
+        <a href="" ng-click="core.newLocation(-1, -1, '')" class="btn btn-default"><i
+                                                                                      class="fa fa-user" aria-hidden="true"></i> {{project.company_name}}</a>
+        <a href="" ng-show="level != 'company'" ngclick="core.newLocation(project.project_id, -1, '/phase-list')" class="btn btndefault"><
+            i class="fa fa-circle-o" aria-hidden="true"></i> {{project.project_name}}</a>
+        <a href="" ng-show="level == 'phase'" ngclick="core.newLocation(project.project_id, phase.phase_id, '/details')" class="btn
+                                                                                                                                btn-default"><i class="fa fa-moon-o" aria-hidden="true"></i> {{phase.phase_name}}</a>
+    </div>
+    <div class="fss-breadcrumb-status" ng-show="level != 'company'">
+        <label class="control-label text-right">Status:</label>
+        <div ng-if="level != 'phase'" class="fss-inline-block">
+            <span class="label" ngclass="core.displayStatusClass(project.project_status)">{{core.displayStatus(project.pr
+                oject_status)}}</span>
+        </div>
+        <div ng-if="level == 'phase'" class="fss-inline-block">
+            <span class="label" ngclass="core.displayStatusClass(phase.phase_status)">{{core.displayStatus(phase.phase_st
+                atus)}}</span>
+        </div>
+    </div>
+</div>

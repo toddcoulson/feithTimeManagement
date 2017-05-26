@@ -1,0 +1,73 @@
+<form name="form.project">
+    <div class="form-group row" >
+        <label class="col-xs-3 control-label text-right">Category</label>
+        <div class="col-xs-9">
+            <div class="btn-group btn-group-justified">
+                <a href=""
+                   ng-repeat="category in categories"
+                   class="btn btn-default"
+                   ng-model="project.category"
+                   ng-class="(category.value == project.category) ? 'fss-status-pending' : ''"
+                   ng-click="project.category = category.value">
+                    {{category.display}}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row"
+         ng-class="(!form.project.discount.$valid)? 'has-error' : ''">
+        <label class="col-xs-3 control-label text-right">Discount</label>
+        <div class="col-xs-3">
+            <input name="discount" type="text" ng-model="project.discount" class="formcontrol"
+                   ng-required="true"/>%
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-xs-3 control-label text-right">Price Model</label>
+        <div class="col-xs-9">
+            <div class="btn-group btn-group-justified">
+                <a href=""
+                   ng-repeat="model in priceModels"
+                   class="btn btn-default"
+                   ng-model="project.price_model"
+                   ng-class="(model.value == project.price_model) ? 'fss-status-pending' : ''"
+                   ng-click="project.price_model = model.value">
+                    {{model.display}}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-xs-3 control-label text-right">Billing Frequency</label>
+        <div class="col-xs-9">
+            <div class="btn-group btn-group-justified">
+                <a href=""
+                   ng-repeat="frequency in frequencies"
+                   class="btn btn-default"
+                   ng-model="project.billing_frequency"
+                   ng-class="(frequency.value == project.billing_frequency) ? 'fss-statuspending'
+                             : ''"
+                   ng-click="project.billing_frequency = frequency.value">
+                    {{frequency.display}}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-xs-3 control-label text-right"></label>
+        <div class="col-xs-9">
+            <div class="col-xs-9">
+                <div class="btn-group btn-group-justified">
+                    <a href=""
+                       ng-repeat="bill in billings"
+                       class="btn btn-default"
+                       ng-model="project.bill_type"
+                       ng-class="(bill.value == project.bill_type) ? 'fss-status-pending' : ''"
+                       ng-click="project.bill_type = bill.value">
+                        {{bill.display}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

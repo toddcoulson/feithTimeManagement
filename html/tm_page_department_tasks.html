@@ -1,0 +1,16 @@
+<div class="fdd-main-nav">
+    <div ng-include src="partials.nav"></div>
+</div>
+<div class="fss-sidebar-content-wrapper">
+    <div class="fss-sidebar-nav-container">
+        <sub-nav nav="navs.admin"
+                 project="project"
+                 phase="phase"
+                 root='true'></sub-nav>
+        <button ng-click="showAdminRolesModal()" class="btn btn-default fss-sidebar-navaction">
+            Add Role</button>
+    </div>
+    <div class="fss-body-container">
+        <div ng-include src="partials.department_tasks"></div>
+    </div>
+</div>

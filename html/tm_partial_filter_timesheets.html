@@ -1,0 +1,88 @@
+<div class="panel panel-default">
+    <div class="panel-heading" ng-click="displayTimeFilter = !displayTimeFilter">
+        <strong class="ng-binding">Filter Timesheets</strong>
+        <span class="pull-right" >
+            <span class="caret" ng-show="!displayTimeFilter"></span>
+            <span class="caret caret-up" ng-show="displayTimeFilter"></span>
+        </span>
+    </div>
+    <form ng-show="displayTimeFilter">
+        <label class="col-xs-12 col-sm-4 control-label text-right">Choose Date
+            Range</label>
+        <div class="col-xs-12 col-sm-8" >
+            <select name="dateValue"
+                    class="form-control"
+                    ng-change="getDateValue(searchEntry.date_value)"
+                    ng-model="searchEntry.date_value"
+                    ng-options="dateValue.display for dateValue in core.dateValues">
+            </select>
+        </div>
+        <div ng-show="displayDates" class="col-xs-12">
+            <label class="col-xs-12 col-sm-4 control-label text-right">Date Start</label>
+            <div class="col-xs-6 col-sm-8 fss-sidebar-nav-action">
+                <div class="datepicker-div">
+                    <input name="cal3" type="text" class="form-control fss-input-inline" ngmodel="
+                                                                                                  checkDates.start_date" ng-change='updateTimeEntries()'
+                           datepicker-popup="{{$parent.dateFormat}}"
+                           is-open="datepickers.cal3"
+                           ng-click="open($event, 'cal3')"
+                           max="checkDates.end_date"
+                           datepicker-options="{{$parent.gcs.dateOptions}}"
+                           close-text="Close"></input>
+                <span class="input-group-btn fss-inline-block">
+                    <button class="btn btn-default fss-calendar-button" href="" ngclick="
+                                                                                         open($event, 'cal3')">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <label class="col-xs-11 col-sm-4 control-label text-right">Date End</label>
+        <div class="col-xs-6 col-sm-8 fss-sidebar-nav-action">
+            <div class="datepicker-div">
+                <input name="cal2" type="text" class="form-control fss-input-inline" ngmodel="
+                                                                                              checkDates.end_date" ng-change='updateTimeEntries()'
+                       datepicker-popup="{{$parent.dateFormat}}"
+                       is-open="datepickers.cal2"
+                       ng-click="open($event, 'cal2')"
+                       min="checkDates.start_date"
+                       datepicker-options="{{$parent.gcs.dateOptions}}"
+                       close-text="Close"></input>
+            <span class="input-group-btn fss-inline-block">
+                <button class="btn btn-default fss-calendar-button" href="" ngclick="
+                                                                                     open($event, 'cal2')">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+            </span>
+        </div>
+        </div>
+</div>
+<div class="form-group row col-xs-12">
+    <label class="col-xs-12 col-sm-4 control-label text-right">Search Entries</label>
+    <div class="col-xs-12 col-sm-8"><input name="searchAll" type="text" ngchange="
+        core.setSearchAll(searchAllValue)" ng-model="searchAllValue" class="formcontrol"/></div>
+</div>
+<div class="form-group row">
+    <label class="col-xs-12 col-sm-4 control-label text-right">Hours From</label>
+    <div class="col-xs-12 col-sm-8"><input name="hours_from" type="number" ngmodel="
+        searchEntry.min_hours" class="form-control" min="0" max="{{searchEntry.max_hours}}"/></div>
+</div>
+<div class="form-group row">
+    <label class="col-xs-12 col-sm-4 control-label text-right">Hours To</label>
+    <div class="col-xs-12 col-sm-8"><input name="hours_to" type="number" ngmodel="
+        searchEntry.max_hours" class="form-control" min="{{searchEntry.min_hours}}" max="24"/></div>
+</div>
+<div class="form-group row">
+    <label class="col-xs-12 col-sm-4 control-label text-right">Most Recent
+        Entries</label>
+    <div class="col-xs-12 col-sm-8"><input name="limitEntries" type="number" ngchange="
+        recentChanged()" ng-model="searchEntry.limitEntries" class="form-control"
+                                           min="0"/></div>
+</div>
+<div class="form-group row">
+    <div class="ng-scope col-xs-12 text-right">
+        <a href="" class="btn btn-default " ng-click="reset()">Reset</a>
+    </div>
+</div>
+</form>
+</div>
